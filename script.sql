@@ -4,9 +4,9 @@ create table "User"(
 	"email" varchar(30) not null unique,
 	"password" varchar(30) not null,
 	birthday date not null,
-	"picture_path" varchar(50),
+	"picture_path" varchar(70),
 	"description" text,
-	"coins" bigint not null check (coins >= 0)
+	"coins" bigint not null check (coins >= 0) default 0
 );
 
 create table "Animation"(
