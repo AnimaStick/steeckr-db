@@ -1,3 +1,14 @@
+drop table if exists "Album" cascade;
+drop table if exists "Album_Category" cascade;
+drop table if exists "Animation" cascade;
+drop table if exists "Animation_Category" cascade;
+drop table if exists "Category" cascade;
+drop table if exists "Comment" cascade;
+drop table if exists "Follow" cascade;
+drop table if exists "Post" cascade;
+drop table if exists "Sticker" cascade;
+drop table if exists "User" cascade;
+
 create table "User"(
 	"id" serial primary key,
 	"username" varchar(30) not null unique,
