@@ -13,7 +13,7 @@ create table "User"(
 	"id" serial primary key,
 	"username" varchar(30) not null unique,
 	"email" varchar(30) not null unique,
-	"password" varchar(30) not null,
+	"password" varchar(100) not null,
 	birthday date not null,
 	"picture_path" varchar(70),
 	"description" text,
