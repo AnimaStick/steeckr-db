@@ -1,0 +1,1 @@
+Repositório para guardar script do banco da aplicação, e de um diagrama feito no site app.diagrams.net

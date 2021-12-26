@@ -8,7 +8,7 @@ drop table if exists "Follow" cascade;
 drop table if exists "Post" cascade;
 drop table if exists "Sticker" cascade;
 drop table if exists "User" cascade;
-drop table if exists "session" cascade;
+/*drop table if exists "Session" cascade;*/
 
 create table "User"(
 	"id" serial primary key,
@@ -103,7 +103,7 @@ create table "Comment"(
 );
 
 /*SESSION TABLE, GUARDA AS SESSÕES PARA UM USUÁRIO SE MANTER LOGADO DURANTE X TEMPO*/
-  
+/*
 CREATE TABLE "session" (
   "sid" varchar NOT NULL COLLATE "default",
   "sess" json NOT NULL,
@@ -114,4 +114,5 @@ WITH (OIDS=FALSE);
 ALTER TABLE "session" ADD CONSTRAINT "session_pkey" PRIMARY KEY ("sid") NOT DEFERRABLE INITIALLY IMMEDIATE;
 
 CREATE INDEX "IDX_session_expire" ON "session" ("expire");
+*/
 
