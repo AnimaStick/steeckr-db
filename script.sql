@@ -24,7 +24,7 @@ create table "User"(
 create table "Animation"(
 	"id" serial primary key,
 	"id_user" int,
-	"animation_path" varchar(50) not null,
+	"animation_path" varchar(60) not null,
 	"title" varchar(30) not null,
 	"description" varchar(50),
 	"likes" int not null, 
