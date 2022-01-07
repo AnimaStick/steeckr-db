@@ -19,6 +19,7 @@ create table "User"(
 	"picture_path" varchar(70),
 	"description" text,
     "isAdm" boolean not null default false,
+    "lastDailyPacket" timestamp not null default '1970-01-01 23:59:00',
 	"coins" bigint not null check (coins >= 0) default 0
 );
 
