@@ -18,6 +18,7 @@ create table "User"(
 	birthday date not null,
 	"picture_path" varchar(70),
 	"description" text,
+    "isAdm" boolean not null default false,
 	"coins" bigint not null check (coins >= 0) default 0
 );
 
