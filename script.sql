@@ -8,6 +8,7 @@ drop table if exists "Follow" cascade;
 drop table if exists "Post" cascade;
 drop table if exists "Sticker" cascade;
 drop table if exists "User" cascade;
+drop table if exists "Like" cascade;
 /*drop table if exists "Session" cascade;*/
 
 create table "User"(
@@ -25,15 +26,27 @@ create table "User"(
 
 create table "Animation"(
 	"id" serial primary key,
-	"id_user" int,
+	"id_user" int not null,
 	"animation_path" varchar(60) not null,
 	"title" varchar(30) not null,
 	"description" varchar(50),
-	"likes" int not null, 
-	"views" bigint not null,
+	"views" bigint not null default 0,
+    "creation_date" timestamp not null default now(),
 	constraint "fk_user" 
 		foreign key("id_user") 
 			references "User"("id")
+);
+
+create table "Like"(
+    "id_user" int not null,
+    "id_animation" int not null,
+    constraint "fk_user" 
+		foreign key("id_user") 
+			references "User"("id"),
+    constraint "fk_animation" 
+		foreign key("id_animation") 
+			references "Animation"("id"),
+    primary key(id_animation,id_user)	
 );
 
 create table "Follow"(
@@ -48,7 +61,7 @@ create table "Follow"(
 );
 create table "Album"(
 	"id" serial primary key,
-	"id_creator" int,
+	"id_creator" int not null,
 	"sticker_qtd" smallint,
 	"nome" varchar(50) not null,
 	"creation_date" date not null,
@@ -67,18 +80,19 @@ create table "Category"(
 	"name" varchar(20)
 );
 create table "Album_Category"(
-	"id_album" int,
-	"id_category" int,
+	"id_album" int not null,
+	"id_category" int not null,
 	constraint "fk_album" 
 		foreign key("id_album") 
 			references "Album"("id"),
 	constraint "fk_category" 
 		foreign key("id_category") 
-			references "Category"("id")
+			references "Category"("id"),
+	primary key(id_category,id_album)
 );
 create table "Animation_Category"(
-	"id_animation" int,
-	"id_category" int,
+	"id_animation" int not null,
+	"id_category" int not null,
 	constraint "fk_animation" 
 		foreign key("id_animation") 
 			references "Animation"("id"),
@@ -96,16 +110,16 @@ create table "Post"(
 			references "Animation"("id")
 );
 create table "Comment"(
-	"id" int primary key, 
-	"id_user" int,
-	"id_post" int,
+	"id_user" int not null,
+	"id_post" int not null,
 	"comment" varchar(140),
 	constraint "fk_user" 
 		foreign key("id_user") 
 			references "User"("id"),
 	constraint "fk_post" 
 		foreign key("id_post")
-			references "Post"("id")
+			references "Post"("id"),
+    primary key("id_user", "id_post")
 );
 
 /*SESSION TABLE, GUARDA AS SESSÕES PARA UM USUÁRIO SE MANTER LOGADO DURANTE X TEMPO*/
