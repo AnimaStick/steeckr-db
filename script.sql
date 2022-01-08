@@ -27,7 +27,7 @@ create table "User"(
 create table "Animation"(
 	"id" serial primary key,
 	"id_user" int not null,
-	"animation_path" varchar(60) not null,
+	"animation_path" varchar(200) not null,
 	"title" varchar(30) not null,
 	"description" varchar(50),
 	"views" bigint not null default 0,
@@ -122,6 +122,23 @@ create table "Comment"(
     primary key("id_user", "id_post")
 );
 
+select * from "User"
+/* ANIMATIONS INSERT EXAMPLES */
+/*insert into "Animation"(id_user, animation_path, title, description, "views") values
+(1, 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/4c1f1384533141.5d5fa79310f29.gif','anim1','dança marota', 1200),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300),
+(1, 'https://images.squarespace-cdn.com/content/v1/5876be053e00be4f63b6796c/1521584987912-ZV7AYJW1BPLS4P4RVRQH/Pumpum-crying.gif','anim3','triste boneco andando coração ;-;', 1400),
+(1, 'https://pa1.narvii.com/6506/d431ed2ace9b0793a604e5dffa4c3e2f2962aece_hq.gif','animSonic','classic sonic running high-resolution pixel art', 5000),
+(1, 'https://3.bp.blogspot.com/-XLIyhaTXJ8A/WZRFGpXtzFI/AAAAAAAAKM0/wZSKyitzqsMLCnaiqTkGVnFf1lVkdG0qQCLcBGAs/s640/dfaa6728122f430aff97ca6741ca3d3c1b99c2b1_hq.gif','anim29','sonic movements animation', 4920),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300),
+(1, 'https://user-images.githubusercontent.com/50672087/107100571-290c1300-6858-11eb-919d-87b65633a43f.gif','anim2','oie :D', 1300)
+*/
 /*SESSION TABLE, GUARDA AS SESSÕES PARA UM USUÁRIO SE MANTER LOGADO DURANTE X TEMPO*/
 /*
 CREATE TABLE "session" (
