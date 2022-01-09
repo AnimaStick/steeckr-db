@@ -34,7 +34,9 @@ create table "Animation"(
     "creation_date" timestamp not null default now(),
 	constraint "fk_user" 
 		foreign key("id_user") 
-			references "User"("id")
+			references "User"("id"),
+    "price" int default null,
+    "rarity" int default null
 );
 
 create table "Like"(
@@ -70,10 +72,6 @@ create table "Album"(
 		foreign key("id_creator") 
 			references "User"("id")		
 );
-create table "Sticker"(
-	"price" int not null,
-	"rarity" smallint not null default 5
-) inherits ("Animation");
 
 create table "Category"(
 	"id" int primary key,
