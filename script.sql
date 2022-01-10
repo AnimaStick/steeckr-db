@@ -9,6 +9,7 @@ drop table if exists "Post" cascade;
 drop table if exists "Sticker" cascade;
 drop table if exists "User" cascade;
 drop table if exists "Like" cascade;
+drop table if exists "User_Animation" cascade;
 /*drop table if exists "Session" cascade;*/
 
 create table "User"(
@@ -22,7 +23,7 @@ create table "User"(
     "isAdm" boolean not null default false,
     "lastDailyPacket" timestamp not null default '1970-01-01 23:59:00',
 	"coins" bigint not null check (coins >= 0) default 0
-);
+); 
 
 create table "Animation"(
 	"id" serial primary key,
@@ -34,7 +35,7 @@ create table "Animation"(
     "creation_date" timestamp not null default now(),
 	constraint "fk_user" 
 		foreign key("id_user") 
-			references "User"("id"),
+			references "User"("id") on delete cascade,
     "price" int default null,
     "rarity" int default null
 );
@@ -44,10 +45,23 @@ create table "Like"(
     "id_animation" int not null,
     constraint "fk_user" 
 		foreign key("id_user") 
-			references "User"("id"),
+			references "User"("id") on delete cascade,
     constraint "fk_animation" 
 		foreign key("id_animation") 
-			references "Animation"("id"),
+			references "Animation"("id") on delete cascade,
+    primary key(id_animation,id_user)	
+);
+
+create table "User_Animation"(
+    "id_user" int not null,
+    "id_animation" int not null,
+	"quantity" int default 1,
+    constraint "fk_user" 
+		foreign key("id_user") 
+			references "User"("id") on delete cascade,
+    constraint "fk_animation" 
+		foreign key("id_animation") 
+			references "Animation"("id") on delete cascade,
     primary key(id_animation,id_user)	
 );
 
@@ -56,10 +70,10 @@ create table "Follow"(
 	"id_followed" int not null,
 	constraint "fk_follower" 
 		foreign key("id_follower") 
-			references "User"("id"),
+			references "User"("id") on delete cascade,
 	constraint "fk_followed" 
 		foreign key("id_followed") 
-			references "User"("id")		
+			references "User"("id") on delete cascade		
 );
 create table "Album"(
 	"id" serial primary key,
@@ -70,7 +84,7 @@ create table "Album"(
 	"description" varchar(255) not null,
 	constraint "fk_creator" 
 		foreign key("id_creator") 
-			references "User"("id")		
+			references "User"("id") on delete cascade		
 );
 
 create table "Category"(
@@ -113,14 +127,13 @@ create table "Comment"(
 	"comment" varchar(140),
 	constraint "fk_user" 
 		foreign key("id_user") 
-			references "User"("id"),
+			references "User"("id") on delete set null,
 	constraint "fk_post" 
 		foreign key("id_post")
-			references "Post"("id"),
+			references "Post"("id") on delete cascade,
     primary key("id_user", "id_post")
 );
 
-select * from "User"
 /* ANIMATIONS INSERT EXAMPLES */
 /*insert into "Animation"(id_user, animation_path, title, description, "views") values
 (1, 'https://mir-s3-cdn-cf.behance.net/project_modules/disp/4c1f1384533141.5d5fa79310f29.gif','anim1','dança marota', 1200),
