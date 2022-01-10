@@ -45,7 +45,7 @@ create table "Like"(
     "id_animation" int not null,
     constraint "fk_user" 
 		foreign key("id_user") 
-			references "User"("id") on delete cascade,
+			references "User"("id") on delete set null,
     constraint "fk_animation" 
 		foreign key("id_animation") 
 			references "Animation"("id") on delete cascade,
@@ -112,26 +112,17 @@ create table "Animation_Category"(
 		foreign key("id_category") 
 			references "Category"("id")
 );
-
-create table "Post"(
-	"id" int primary key, 
-	"id_animation" int,
-	"data_inclusao" date,
-	constraint "fk_animation" 
-		foreign key("id_animation") 
-			references "Animation"("id")
-);
 create table "Comment"(
 	"id_user" int not null,
-	"id_post" int not null,
+	"id_animation" int not null,
 	"comment" varchar(140),
 	constraint "fk_user" 
 		foreign key("id_user") 
 			references "User"("id") on delete set null,
-	constraint "fk_post" 
-		foreign key("id_post")
-			references "Post"("id") on delete cascade,
-    primary key("id_user", "id_post")
+	constraint "fk_animation" 
+		foreign key("id_animation")
+			references "Animation"("id") on delete cascade,
+    primary key("id_user", "id_animation")
 );
 
 /* ANIMATIONS INSERT EXAMPLES */
