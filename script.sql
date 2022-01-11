@@ -113,7 +113,7 @@ create table "Animation_Category"(
 			references "Category"("id")
 );
 create table "Comment"(
-	"id_user" int not null,
+	"id_user" int,
 	"id_animation" int not null,
 	"comment" varchar(140),
 	constraint "fk_user" 
@@ -121,8 +121,7 @@ create table "Comment"(
 			references "User"("id") on delete set null,
 	constraint "fk_animation" 
 		foreign key("id_animation")
-			references "Animation"("id") on delete cascade,
-    primary key("id_user", "id_animation")
+			references "Animation"("id") on delete cascade
 );
 
 /* ANIMATIONS INSERT EXAMPLES */
